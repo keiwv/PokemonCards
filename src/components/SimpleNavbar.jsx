@@ -6,6 +6,7 @@ import {
     IconButton,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import logo from '../assets/logo.png'
 
 function NavList() {
     return (
@@ -17,7 +18,7 @@ function NavList() {
                 className="p-1 font-medium"
             >
                 <a href="#" className="flex items-center hover:text-blue-500 transition-colors">
-                    Pages
+                    Inicio
                 </a>
             </Typography>
             <Typography
@@ -27,7 +28,7 @@ function NavList() {
                 className="p-1 font-medium"
             >
                 <a href="#" className="flex items-center hover:text-blue-500 transition-colors">
-                    Account
+                    Pokemones
                 </a>
             </Typography>
             <Typography
@@ -37,7 +38,7 @@ function NavList() {
                 className="p-1 font-medium"
             >
                 <a href="#" className="flex items-center hover:text-blue-500 transition-colors">
-                    Blocks
+                    Favoritos
                 </a>
             </Typography>
             <Typography
@@ -47,7 +48,7 @@ function NavList() {
                 className="p-1 font-medium"
             >
                 <a href="#" className="flex items-center hover:text-blue-500 transition-colors">
-                    Docs
+                    Github
                 </a>
             </Typography>
         </ul>
@@ -69,8 +70,9 @@ export function SimpleNavbar() {
     }, []);
 
     return (
-        <Navbar className="mx-auto px-5 py-3 mb-2 ">
-            <div className="flex items-center justify-between">
+        <Navbar className="mx-auto px-5 py-3 mb-2">
+            <div className="flex items-center space-x-2">
+                <img src={logo} alt="" className="h-5 w-5" />
                 <Typography
                     as="a"
                     href="#"
@@ -78,22 +80,21 @@ export function SimpleNavbar() {
                     color="black"
                     className="mr-4 cursor-pointer py-1.5"
                 >
-                    Material Tailwind
+                    Pokemon Cards
                 </Typography>
-                <div className="hidden lg:block">
+                <div className="ml-auto hidden lg:block">
                     <NavList />
                 </div>
                 <IconButton
                     variant="text"
                     className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
                     ripple={false}
-                    
                     onClick={() => setOpenNav(!openNav)}
                 >
                     {openNav ? (
                         <XMarkIcon className="h-6 w-6" strokeWidth={2} color="black" />
                     ) : (
-                        <Bars3Icon className="h-6 w-6" strokeWidth={2} color="black"/>
+                        <Bars3Icon className="h-6 w-6" strokeWidth={2} color="black" />
                     )}
                 </IconButton>
             </div>

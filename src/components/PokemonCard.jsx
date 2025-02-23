@@ -5,7 +5,7 @@ export default function PokemonCard({ pokemon}) {
         <>
             <div>
                 {pokemon && (
-                    <div className="border p-4 text-center align-middle box-decoration-slice bg-gradient-to-r from-indigo-600 to-pink-500 px-2 text-white m-1 transition-transform duration-300 ease-in-out transform hover:-translate-y-2 shadow-lg rounded-lg">
+                    <div className="border p-4 text-center align-middle box-decoration-slice bg-gradient-to-r from-indigo-600 to-pink-500 px-2 text-white m-1 transition-transform duration-300 ease-in-out transform hover:-translate-y-2 shadow-lg rounded-lg cursor-pointer">
                         <div className="flex justify-center items-center mb-2">
                             <img 
                                 src={pokemon.details.sprites.front_default} 

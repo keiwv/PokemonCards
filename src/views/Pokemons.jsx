@@ -14,7 +14,6 @@ export default function Pokemons() {
         }
     }, [dispatch]);
 
-    if (error) return <p className="text-red-500">Error: {error}</p>;
 
     return (
         <div className="pt-2 bg-gray-700 w-full">
