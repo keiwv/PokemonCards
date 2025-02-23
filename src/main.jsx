@@ -6,7 +6,7 @@ import { AppProvider } from './context/AppContext.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router'
 import Pokemons from './views/Pokemons.jsx'
 import { Provider } from 'react-redux'
-import store from './redux/store.js'
+import {store} from './redux/store.js'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

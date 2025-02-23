@@ -4,18 +4,19 @@ import { getPokemonsWithDetails } from "../../api";
 export const fetchPokemonsWithDetails = createAsyncThunk(
     "pokemons/fetchPokemonsWithDetails",
     async () => {
-      const response = await getPokemonsWithDetails();
-      const data = response.json();
-      return data.results;
+        const response = await getPokemonsWithDetails();
+        console.log(response);
+        return response;
     }
 );
 
-export const pokemonSlice = createSlice({
+const pokemonsSlice = createSlice({
     name: "pokemons",
     initialState: {
         pokemons: [],
         favoritePokemons: [],
-        isLoading: Boolean,
+        isLoading: false,
+        error: null,
     },
     reducers: {
         addFavoritePokemons: (state, action) => {
@@ -31,17 +32,27 @@ export const pokemonSlice = createSlice({
         },
     },
 
-    extraReducers: (builder) => { // This is recommended when we're using async functions so we can play with the different states (done, loading and error).
-      builder
-      .addCase(fetchPokemonsWithDetails.pending, (state) => {state.isLoading = true})
-      .addCase(fetchPokemonsWithDetails.fulfilled, (state, action) =>{
-        state.pokemons = action.payload;
-        state.isLoading = false;
-      });
-    }
+    extraReducers: (builder) => {
+        // This is recommended when we're using async functions so we can play with the different states (done, loading and error).
+        builder
+            .addCase(fetchPokemonsWithDetails.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(fetchPokemonsWithDetails.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.pokemons = action.payload;
+            })
+            .addCase(fetchPokemonsWithDetails.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.error.message;
+            });
+    },
 });
 
-export const { addFavoritePokemons, removeFavoritePokemons, clearFavoritePokemonsList } =
-    pokemonSlice.actions;
+export const {
+    addFavoritePokemons,
+    removeFavoritePokemons,
+    clearFavoritePokemonsList,
+} = pokemonsSlice.actions;
 
-export default pokemonSlice.reducer;
+export default pokemonsSlice.reducer;

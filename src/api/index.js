@@ -32,18 +32,24 @@ export const getPokemonDetails = (url) => {
 };
 
 export const getPokemonsWithDetails = async () => {
-    const pokemons = getPokemons(); 
-
-    const PokemonsDetails = await Promise.all(
+    try {
+      const pokemons = await getPokemons(); 
+  
+      const pokemonsDetails = await Promise.all(
         pokemons.map(async (pokemon) => {
-            const details = await getPokemonDetails(pokemon.url);
-            return {
-                name: pokemon.name,
-                details: details,
-            };
+          const details = await getPokemonDetails(pokemon.url);
+          return {
+            id: details.id,
+            name: pokemon.name,
+            details,
+          };
         })
-    );
-
-    return PokemonsDetails;
-};
-
+      );
+  
+      return pokemonsDetails;
+    } catch (error) {
+      console.error("Error fetching Pokémon details:", error);
+      return [];
+    }
+  };
+  
