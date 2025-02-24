@@ -21,7 +21,7 @@ function NavList() {
                 color="black"
                 className="p-1 font-medium"
             >
-                <a href="/" className="flex items-center hover:text-blue-500 transition-colors">
+                <a href="/PokemonCards" className="flex items-center hover:text-blue-500 transition-colors">
                     Inicio
                 </a>
             </Typography>
@@ -108,7 +108,7 @@ export function SimpleNavbar() {
                 <img src={logo} alt="" className="h-5 w-5" />
                 <Typography
                     as="a"
-                    href="/"
+                    href="/PokemonCards"
                     variant="h6"
                     color="black"
                     className="mr-4 cursor-pointer py-1.5"
