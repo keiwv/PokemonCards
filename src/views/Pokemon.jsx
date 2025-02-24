@@ -18,8 +18,8 @@ export default function Pokemon() {
 
     const changeImage = () => {
         if (showShiny) {
-            setShowShiny(false); 
-        } else{
+            setShowShiny(false);
+        } else {
             setShowShiny(true);
         }
     };
@@ -36,12 +36,15 @@ export default function Pokemon() {
     }, [pokemons, id]);
 
     return (
-        <div className="bg-gray-100 min-h-screen">
+        <div className="bg-gray-700 min-h-screen">
             <SimpleNavbar />
             <div className="flex justify-center items-center h-[calc(100vh-4rem)]">
                 <div className="text-center p-6 bg-white rounded-xl shadow-lg w-4/5 max-w-lg relative">
                     {(isLoading || !pokemon?.name) ? (
-                        <p className="text-xl text-pink-400 font-bold">Loading...</p>
+                        <div className="flex justify-center items-center w-36 h-36 mx-auto bg-white border-4 border-gray-300 rounded-xl">
+                            <div className="border-t-4 border-blue-400 border-solid w-16 h-16 rounded-full animate-spin"></div>
+                            <p className="absolute text-lg text-gray-600"></p>
+                        </div>
                     ) : (
                         <div className="mb-6">
                             {/* Flechas de navegación */}
