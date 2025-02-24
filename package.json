@@ -1,5 +1,6 @@
 {
   "name": "pokemongo",
+  "homepage": "https://keiwv.github.io/PokemonCards/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
