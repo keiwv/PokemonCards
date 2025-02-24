@@ -10,7 +10,7 @@ import { Provider } from 'react-redux'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename='/PokemonCards'>
         <Provider store={store}>
           <Routes>
             <Route index element={<App />} />
