@@ -1,5 +1,5 @@
 export const getPokemons = () => {
-    return fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
+    return fetch("https://pokeapi.co/api/v2/pokemon?limit=150")
         .then((response) => {
             if (!response.ok) {
                 throw new Error("Network response was not ok");
