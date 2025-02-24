@@ -5,7 +5,6 @@ export const fetchPokemonsWithDetails = createAsyncThunk(
     "pokemons/fetchPokemonsWithDetails",
     async () => {
         const response = await getPokemonsWithDetails();
-        console.log(response);
         return response;
     }
 );
@@ -35,6 +34,7 @@ const pokemonsSlice = createSlice({
     extraReducers: (builder) => {
         // This is recommended when we're using async functions so we can play with the different states (done, loading and error).
         builder
+            /* ALL POKEMONS */
             .addCase(fetchPokemonsWithDetails.pending, (state) => {
                 state.isLoading = true;
             })
