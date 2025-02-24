@@ -31,7 +31,7 @@ function NavList() {
                 color="black"
                 className="p-1 font-medium"
             >
-                <a href="/pokemons" className="flex items-center hover:text-blue-500 transition-colors">
+                <a href="/PokemonCards/pokemons" className="flex items-center hover:text-blue-500 transition-colors">
                     Pokemones
                 </a>
             </Typography>
