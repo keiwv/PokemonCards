@@ -1,17 +1,10 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchPokemonsWithDetails } from "../redux/slices/pokemonsSlice";
+import { useSelector } from "react-redux";
 
 export default function Welcome() {
-    const dispatch = useDispatch();
-    const { pokemons, isLoading, error } = useSelector((state) => state.pokemon);
 
-    useEffect(() => {
-        if (pokemons.length === 0) {
-            dispatch(fetchPokemonsWithDetails());
-        }
-    }, [dispatch]);
+    const { pokemons, isLoading, error } = useSelector((state) => state.pokemon);
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 flex flex-col justify-center items-center text-white">

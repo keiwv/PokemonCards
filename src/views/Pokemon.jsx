@@ -1,14 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { fetchPokemonsWithDetails } from "../redux/slices/pokemonsSlice";
 import { Link } from "react-router";
 import { SimpleNavbar } from "../components/SimpleNavbar";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa"; // Importar íconos de flechas
 
 export default function Pokemon() {
     const { id } = useParams();
-    const dispatch = useDispatch();
     const { pokemons, isLoading, error } = useSelector((state) => state.pokemon);
     const [showShiny, setShowShiny] = useState(false);
 
@@ -24,11 +22,6 @@ export default function Pokemon() {
         }
     };
 
-    useEffect(() => {
-        if (pokemons.length === 0) {
-            dispatch(fetchPokemonsWithDetails());
-        }
-    }, [dispatch, pokemons.length]);
 
     const pokemon = useMemo(() => {
         const pokemonFound = pokemons?.find((p) => p.id === Number(id));

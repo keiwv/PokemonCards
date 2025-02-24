@@ -1,18 +1,10 @@
 import React, { useEffect } from "react";
 import PokemonCard from "../components/PokemonCard";
 import { SimpleNavbar } from "../components/SimpleNavbar";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchPokemonsWithDetails } from "../redux/slices/pokemonsSlice";
+import { useSelector } from "react-redux";
 
 export default function Pokemons() {
-    const dispatch = useDispatch();
     const { pokemons, isLoading, error } = useSelector((state) => state.pokemon);
-
-    useEffect(() => {
-        if (pokemons.length === 0) {
-            dispatch(fetchPokemonsWithDetails());
-        }
-    }, [dispatch]);
 
     return (
         <div className="pt-2 bg-gray-700 w-full">

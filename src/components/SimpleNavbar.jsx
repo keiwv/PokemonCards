@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     Navbar,
     Collapse,
@@ -8,6 +8,9 @@ import {
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from '../assets/logo.png'
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPokemonsWithDetails } from "../redux/slices/pokemonsSlice";
+import { Link } from "react-router";
 
 function NavList() {
     return (
@@ -57,19 +60,46 @@ function NavList() {
 }
 
 export function SimpleNavbar() {
-    const [openNav, setOpenNav] = React.useState(false);
-    const [searchQuery, setSearchQuery] = React.useState("");
+    const [openNav, setOpenNav] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [filteredPokemons, setFilteredPokemons] = useState([]);
+
+    const dispatch = useDispatch();
+    const { pokemons } = useSelector((state) => state.pokemon);
+
+    useEffect(() => {
+        if (pokemons.length === 0) {
+            dispatch(fetchPokemonsWithDetails());
+        }
+    }, [dispatch]);
 
     const handleWindowResize = () =>
         window.innerWidth >= 960 && setOpenNav(false);
 
-    React.useEffect(() => {
+    useEffect(() => {
         window.addEventListener("resize", handleWindowResize);
 
         return () => {
             window.removeEventListener("resize", handleWindowResize);
         };
     }, []);
+
+
+
+    const handleSearch = (query) => {
+        setSearchQuery(query);
+
+        if (query) {
+            const results = pokemons.filter(pokemon =>
+                pokemon.name.toLowerCase().includes(query.toLowerCase()) ||
+                pokemon.id.toString().includes(query)
+            );
+            setFilteredPokemons(results);
+        } else {
+            setFilteredPokemons([]);
+        }
+    };
+
 
     return (
         <Navbar className="mx-auto px-5 py-3 mb-2">
@@ -86,14 +116,30 @@ export function SimpleNavbar() {
                 </Typography>
 
                 {/* Barra de búsqueda en pantallas grandes */}
-                <div className=" lg:block flex-1 mx-4">
+                <div className="relative">
                     <Input
                         type="text"
                         value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        label="Buscar Pokemón"
+                        onChange={(e) => handleSearch(e.target.value)}
+                        label="Buscar Pokemón por nombre o ID"
                         className={`w-full text-black border ${searchQuery ? 'bg-gray-300' : 'border-white'}`}
                     />
+
+                    {filteredPokemons.length > 0 && (
+                        <ul className="absolute w-full bg-white border mt-1 max-h-60 overflow-auto z-10">
+                            {filteredPokemons.map((pokemon) => (
+                                <li key={pokemon.id}>
+                                    <Link
+                                        to={`/pokemons/${pokemon.id}`}
+                                        className="px-4 py-10 hover:bg-gray-200 cursor-pointer text-black"
+                                    >
+                                        {pokemon.name}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+
                 </div>
 
                 <div className="ml-auto hidden lg:block">
