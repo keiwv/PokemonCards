@@ -30,7 +30,9 @@ export default function Pokemon() {
 
     return (
         <div className="bg-gray-700 min-h-screen">
+            <div className="pt-4">
             <SimpleNavbar />
+            </div>
             <div className="flex justify-center items-center h-[calc(100vh-4rem)]">
                 <div className="text-center p-6 bg-white rounded-xl shadow-lg w-4/5 max-w-lg relative">
                     {(isLoading || !pokemon?.name) ? (

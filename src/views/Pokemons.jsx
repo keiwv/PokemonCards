@@ -7,7 +7,7 @@ export default function Pokemons() {
     const { pokemons, isLoading, error } = useSelector((state) => state.pokemon);
 
     return (
-        <div className="pt-2 bg-gray-700 w-full">
+        <div className="pt-4 bg-gray-700 w-full">
             <SimpleNavbar/>
             {isLoading ? (
                 <div className="flex justify-center items-center h-screen">
