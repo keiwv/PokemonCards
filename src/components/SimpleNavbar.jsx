@@ -7,7 +7,7 @@ import {
     Input
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import logo from '../assets/logo.png'
+import logo from '../assets/logo.png';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPokemonsWithDetails } from "../redux/slices/pokemonsSlice";
 import { Link } from "react-router";
@@ -101,8 +101,9 @@ export function SimpleNavbar() {
     };
 
 
+
     return (
-        <Navbar className="mx-auto px-5 py-3 mb-2">
+        <Navbar className="sticky top-0 z-50 mx-auto px-5 py-3 mb-2">
             <div className="flex items-center space-x-2 w-full">
                 <img src={logo} alt="" className="h-5 w-5" />
                 <Typography
@@ -116,7 +117,7 @@ export function SimpleNavbar() {
                 </Typography>
 
                 {/* Barra de búsqueda en pantallas grandes */}
-                <div className="relative">
+                <div className="relative z-50">
                     <Input
                         type="text"
                         value={searchQuery}
@@ -126,21 +127,27 @@ export function SimpleNavbar() {
                     />
 
                     {filteredPokemons.length > 0 && (
-                        <ul className="absolute w-full bg-white border mt-1 max-h-60 overflow-auto z-10">
+                        <ul className="absolute w-full bg-white border mt-1 max-h-60 overflow-auto z-50">
                             {filteredPokemons.map((pokemon) => (
                                 <li key={pokemon.id}>
                                     <Link
                                         to={`/pokemons/${pokemon.id}`}
-                                        className="px-4 py-10 hover:bg-gray-200 cursor-pointer text-black"
+                                        className="px-4 py-2 flex items-center space-x-3 hover:bg-gray-200 cursor-pointer text-black"
                                     >
-                                        {pokemon.name}
+                                        <img
+                                            src={pokemon.details.sprites.front_default}
+                                            alt={pokemon.name}
+                                            className="w-10 h-10 rounded"
+                                        />
+                                        <span>{pokemon.name}</span>
                                     </Link>
                                 </li>
                             ))}
                         </ul>
                     )}
-
                 </div>
+
+
 
                 <div className="ml-auto hidden lg:block">
                     <NavList />
