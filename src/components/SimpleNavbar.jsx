@@ -12,7 +12,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPokemonsWithDetails } from "../redux/slices/pokemonsSlice";
 import { Link } from "react-router";
 
+
+
 function NavList() {
+
+    const { user, isLoggedIn } = useSelector((state) => state.auth);
+    
     return (
         <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
             <Typography
@@ -35,7 +40,8 @@ function NavList() {
                     Pokemones
                 </a>
             </Typography>
-            <Typography
+            {isLoggedIn ? (
+                <Typography
                 as="li"
                 variant="small"
                 color="black"
@@ -45,6 +51,7 @@ function NavList() {
                     Favoritos
                 </a>
             </Typography>
+            ) : null}
             <Typography
                 as="li"
                 variant="small"
@@ -66,6 +73,7 @@ export function SimpleNavbar() {
 
     const dispatch = useDispatch();
     const { pokemons } = useSelector((state) => state.pokemon);
+
 
     useEffect(() => {
         if (pokemons.length === 0) {
