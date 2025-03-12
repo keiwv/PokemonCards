@@ -14,7 +14,7 @@ export default function Pokemons() {
                     <div className="border-t-4 border-blue-400 border-solid w-16 h-16 rounded-full animate-spin"></div>
                 </div>
             ) : (
-                <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-10 gap-4 p-4 ">
+                <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3 p-3 ">
                     {pokemons.map((pokemon) => (
                         <PokemonCard key={pokemon.id} pokemon={pokemon} />
                     ))}

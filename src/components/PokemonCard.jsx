@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 
 export default function PokemonCard({ pokemon }) {
+    const [isFavorite, setIsFavorite] = useState(false);
+
+    const toggleFavorite = () => {
+        setIsFavorite(!isFavorite);
+    };
+
     return (
         <>
             <div>
@@ -18,6 +27,15 @@ export default function PokemonCard({ pokemon }) {
                             <div className="text-lg font-bold">{pokemon.name}</div>
                             <p className="text-sm">Height: {pokemon.details.height}</p>
                             <p className="text-sm">Weight: {pokemon.details.weight}</p>
+                            <button 
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    toggleFavorite();
+                                }} 
+                                className="mt-2"
+                            >
+                                <FontAwesomeIcon icon={isFavorite ? solidStar : regularStar} />
+                            </button>
                         </div>
                     </Link>
                 )}
