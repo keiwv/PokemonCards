@@ -12,9 +12,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPokemonsWithDetails } from "../redux/slices/pokemonsSlice";
 import { Link } from "react-router";
 
+
 function NavList() {
 
     const { user, isLoggedIn } = useSelector((state) => state.auth);
+
+    console.log(user, isLoggedIn);  
 
     return (
         <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -24,9 +27,7 @@ function NavList() {
                 color="black"
                 className="p-1 font-medium"
             >
-                <a href="/PokemonCards/" className="flex items-center hover:text-blue-500 transition-colors">
-                    Inicio
-                </a>
+                <Link to={'/'} className="flex items-center hover:text-blue-500 transition-colors">Inicio</Link>
             </Typography>
             <Typography
                 as="li"
@@ -34,30 +35,30 @@ function NavList() {
                 color="black"
                 className="p-1 font-medium"
             >
-                <a href="/PokemonCards/pokemons" className="flex items-center hover:text-blue-500 transition-colors">
-                    Pokemones
-                </a>
+
+                <Link to={'/pokemons'} className="flex items-center hover:text-blue-500 transition-colors">Pokemons</Link>
+
             </Typography>
-            {isLoggedIn ? (
+            {user ? (
                 <Typography
-                as="li"
-                variant="small"
-                color="black"
-                className="p-1 font-medium"
-            >
-                <a href="#" className="flex items-center hover:text-blue-500 transition-colors">
-                    Favoritos
-                </a>
-            </Typography>
+                    as="li"
+                    variant="small"
+                    color="black"
+                    className="p-1 font-medium"
+                >
+                    <Link to={'/pokemons/favorite'} className="flex items-center hover:text-blue-500 transition-colors">
+                        Favoritos
+                    </Link>
+                </Typography>
             ) : <Typography
                 as="li"
                 variant="small"
                 color="black"
                 className="p-1 font-medium">
-                <a href="/PokemonCards/login" className="flex items-center hover:text-blue-500 transition-colors">
+                <Link to={'/login'} className="flex items-center hover:text-blue-500 transition-colors">
                     Iniciar sesión
-                </a>
-                </Typography>}
+                </Link>
+            </Typography>}
             <Typography
                 as="li"
                 variant="small"

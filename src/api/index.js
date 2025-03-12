@@ -61,8 +61,6 @@ export const login = async (email, password) => {
             body: JSON.stringify({ email, password }),
         });
 
-        console.log("Login result:", result);
-
         if (!result.ok) {
             throw new Error("Credenciales incorrectas");
         }

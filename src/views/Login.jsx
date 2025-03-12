@@ -4,6 +4,7 @@ import background from "./../assets/background-login.gif";
 import { motion } from "framer-motion";
 import { Login } from "../redux/slices/authSlice";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 
 
 export default function LoginUser() {
@@ -11,14 +12,19 @@ export default function LoginUser() {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const user = await dispatch(Login({ email, password })).unwrap();
-      alert(`Usuario logueado: ${JSON.stringify(user)}`);
-      console.log("Usuario logueado", user);
+
+      if (user) {
+        localStorage.setItem("user", JSON.stringify(user));
+        navigate("/pokemons");
+      }
+
     } catch (error) {
       console.log("Error al iniciar sesión:", error.message);
     }
@@ -29,7 +35,7 @@ export default function LoginUser() {
     <div className="flex items-center justify-center min-h-screen bg-black relative overflow-hidden">
       {/* Fondo decorativo */}
       <div className="absolute inset-0 bg-pokemon-pattern opacity-50">
-        <img src={background} alt="Fondo" />
+        <img src={background} alt="Fondo" className="w-full h-full object-cover" />
       </div>
 
       <motion.div
