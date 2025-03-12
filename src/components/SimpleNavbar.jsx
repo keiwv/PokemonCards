@@ -12,12 +12,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPokemonsWithDetails } from "../redux/slices/pokemonsSlice";
 import { Link } from "react-router";
 
-
-
 function NavList() {
 
     const { user, isLoggedIn } = useSelector((state) => state.auth);
-    
+
     return (
         <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
             <Typography
@@ -51,7 +49,15 @@ function NavList() {
                     Favoritos
                 </a>
             </Typography>
-            ) : null}
+            ) : <Typography
+                as="li"
+                variant="small"
+                color="black"
+                className="p-1 font-medium">
+                <a href="/PokemonCards/login" className="flex items-center hover:text-blue-500 transition-colors">
+                    Iniciar sesión
+                </a>
+                </Typography>}
             <Typography
                 as="li"
                 variant="small"

@@ -1,4 +1,4 @@
-const LOCAL_API = "http://localhost:3000/";  // Backend API URL
+const LOCAL_API = "http://localhost:3000/user/";  // Backend API URL
 
 export const getPokemons = () => {
     return fetch("https://pokeapi.co/api/v2/pokemon?limit=150")
@@ -52,18 +52,25 @@ export const getPokemonsWithDetails = async () => {
 };
 
 export const login = async (email, password) => {
-    const result = await fetch(`${LOCAL_API}login`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-    });
+    try {
+        const result = await fetch(`${LOCAL_API}login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+        });
 
-    if (result.ok) {
-        return result.json();
-    } else {
-        throw new Error("Error logging in");
+        console.log("Login result:", result);
+
+        if (!result.ok) {
+            throw new Error("Credenciales incorrectas");
+        }
+
+        return await result.json();
+    } catch (error) {
+        console.error("Login error:", error);
+        throw error;
     }
 };
 
